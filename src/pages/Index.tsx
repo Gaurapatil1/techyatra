@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Instagram, Linkedin, Github } from 'lucide-react';
 import Header from '@/components/Header';
 import TabSection from '@/components/TabSection';
+import LearningSection from '@/components/LearningSection';
 
 const Index = () => {
   const scrollToSection = (sectionId: string) => {
@@ -32,18 +33,34 @@ const Index = () => {
           <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
             Get personalized learning paths based on your interests and goals. Whether you're a student starting fresh or a working professional looking to upskill — we've got the perfect roadmap for you.
           </p>
-          <Button 
-            onClick={() => scrollToSection('learning-paths')}
-            className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-4 text-xl font-semibold rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
-          >
-            Start Exploring <ArrowRight className="ml-2" size={24} />
-          </Button>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              onClick={() => scrollToSection('learning-paths')}
+              className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-4 text-xl font-semibold rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
+            >
+              Start Exploring <ArrowRight className="ml-2" size={24} />
+            </Button>
+            
+            <Button 
+              onClick={() => scrollToSection('free-learning')}
+              variant="outline"
+              className="border-2 border-green-500 text-green-600 hover:bg-green-50 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
+            >
+              Learn Tech Free 📚
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Main Learning Paths Section */}
       <div id="learning-paths">
         <TabSection />
+      </div>
+
+      {/* Free Learning Section */}
+      <div id="free-learning">
+        <LearningSection />
       </div>
 
       {/* Footer */}
@@ -141,11 +158,11 @@ const Index = () => {
           <Button 
             variant="ghost" 
             size="sm" 
-            onClick={() => window.open('https://theboringeducation.com', '_blank')}
+            onClick={() => scrollToSection('free-learning')}
             className="flex flex-col items-center px-2 text-gray-600 hover:text-green-600"
           >
-            <span className="text-lg mb-1">🌐</span>
-            <span className="text-xs font-medium">Website</span>
+            <span className="text-lg mb-1">📚</span>
+            <span className="text-xs font-medium">Learn</span>
           </Button>
         </div>
       </div>

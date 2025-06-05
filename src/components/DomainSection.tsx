@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ExternalLink } from 'lucide-react';
 
 const DomainSection = () => {
   const [expandedDomain, setExpandedDomain] = useState<string | null>(null);
@@ -12,12 +12,11 @@ const DomainSection = () => {
       name: 'Frontend Development',
       beginnerFriendly: true,
       jobDemand: 'High',
-      salaryRange: '₹3-12 LPA',
+      salaryRange: '₹3-8 LPA',
       timeToLearn: '4-6 Months',
       remoteFriendly: true,
-      companyTypes: ['Startups', 'Product Companies', 'Service Companies', 'E-commerce'],
-      languages: ['JavaScript', 'TypeScript', 'React', 'Vue', 'Angular', 'Svelte'],
-      gradient: 'from-blue-500 to-cyan-500',
+      companyTypes: ['Startups', 'Product Companies', 'Service Companies'],
+      languages: ['JavaScript', 'TypeScript', 'React', 'Vue', 'Angular'],
       howToLearn: [
         'Start with HTML, CSS, and JavaScript fundamentals',
         'Build responsive websites and interactive UIs',
@@ -25,10 +24,20 @@ const DomainSection = () => {
         'Learn state management and API integration'
       ],
       whereToLearn: [
-        'YouTube: "Complete Web Development by CodeWithHarry"',
-        'FreeCodeCamp Frontend Certification',
-        'Roadmap.sh Frontend Developer Path',
+        'Zero to One Frontend Dev - The Boring Education',
+        'Basics of Programming with JS - The Boring Education',
+        'Use ChatGPT for specific concept explanations',
         'MDN Web Docs for references'
+      ],
+      courseLinks: [
+        {
+          name: 'Zero to One Frontend Dev',
+          url: 'https://www.theboringeducation.com/shiksha/zero-to-one-frontend-development?courseId=677642add16888110ba779ad'
+        },
+        {
+          name: 'Basics of Programming with JS',
+          url: 'https://www.theboringeducation.com/shiksha/basics-of-programming-with-js?courseId=66b99909946f754d9d7a4c50'
+        }
       ]
     },
     {
@@ -36,12 +45,11 @@ const DomainSection = () => {
       name: 'Backend Development',
       beginnerFriendly: true,
       jobDemand: 'High',
-      salaryRange: '₹4-15 LPA',
-      timeToLearn: '5-8 Months',
+      salaryRange: '₹4-10 LPA',
+      timeToLearn: '5-7 Months',
       remoteFriendly: true,
-      companyTypes: ['All Companies', 'Tech Giants', 'Fintech', 'Healthcare'],
-      languages: ['Node.js', 'Python', 'Java', 'Go', 'C#', 'PHP'],
-      gradient: 'from-purple-500 to-pink-500',
+      companyTypes: ['All Companies', 'Tech Giants', 'Fintech'],
+      languages: ['Node.js', 'Python', 'Java', 'Go', 'C#'],
       howToLearn: [
         'Learn server-side programming fundamentals',
         'Understand databases and API design',
@@ -49,10 +57,20 @@ const DomainSection = () => {
         'Practice system design concepts'
       ],
       whereToLearn: [
-        'YouTube: "Backend Development by Hitesh Choudhary"',
-        'FreeCodeCamp Backend Certification',
-        'Roadmap.sh Backend Developer Path',
-        'AWS/Azure Documentation'
+        'Zero to One Backend Dev - The Boring Education',
+        'Logic Building For Everyone - The Boring Education',
+        'Use ChatGPT for system design concepts',
+        'AWS/Azure Documentation for cloud services'
+      ],
+      courseLinks: [
+        {
+          name: 'Zero to One Backend Dev',
+          url: 'https://www.theboringeducation.com/shiksha/zero-to-one-backend-development?courseId=6799dfcadd77f0ff4c605790'
+        },
+        {
+          name: 'Logic Building For Everyone',
+          url: 'https://www.theboringeducation.com/shiksha/logic-building-for-everyone?courseId=669f374b2ef89c28d87b4473'
+        }
       ]
     },
     {
@@ -154,13 +172,13 @@ const DomainSection = () => {
   ];
 
   return (
-    <div>
-      <div className="text-center mb-10">
-        <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+    <div className="animate-fade-in">
+      <div className="text-center mb-8">
+        <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent mb-3">
           Explore by Domain
         </h3>
         <p className="text-gray-600 text-lg">
-          Timeline based on <span className="font-semibold text-blue-600">2-3 hours of daily learning</span>
+          Timeline based on <span className="font-semibold text-purple-600">2-3 hours of daily learning</span>
         </p>
       </div>
       
@@ -168,13 +186,13 @@ const DomainSection = () => {
         {domains.map((domain) => (
           <Card 
             key={domain.id} 
-            className={`cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] bg-gradient-to-br from-white to-gray-50/50 backdrop-blur-sm border-0 shadow-lg ${
-              expandedDomain === domain.id ? 'ring-2 ring-purple-400 shadow-2xl scale-[1.02]' : ''
+            className={`cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 bg-gradient-to-br from-white via-gray-50 to-purple-50 border-0 shadow-lg ${
+              expandedDomain === domain.id ? 'ring-2 ring-purple-500 shadow-2xl scale-105' : ''
             }`}
             onClick={() => setExpandedDomain(expandedDomain === domain.id ? null : domain.id)}
           >
-            <CardHeader className="pb-3">
-              <CardTitle className={`text-lg font-bold bg-gradient-to-r ${domain.gradient} bg-clip-text text-transparent`}>
+            <CardHeader>
+              <CardTitle className="text-lg bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
                 {domain.name}
               </CardTitle>
             </CardHeader>
@@ -182,96 +200,94 @@ const DomainSection = () => {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Beginner Friendly:</span>
-                  <Badge variant={domain.beginnerFriendly ? "default" : "secondary"} className="font-medium">
+                  <Badge variant={domain.beginnerFriendly ? "default" : "secondary"} className="bg-gradient-to-r from-green-500 to-emerald-500 text-white">
                     {domain.beginnerFriendly ? "Yes" : "No"}
                   </Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Job Demand:</span>
-                  <Badge variant={domain.jobDemand === 'High' || domain.jobDemand === 'Very High' ? "default" : "secondary"} className="font-medium">
+                  <Badge variant={domain.jobDemand === 'High' ? "default" : "secondary"} className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
                     {domain.jobDemand}
                   </Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Salary Range:</span>
-                  <span className="text-sm font-bold text-green-600">{domain.salaryRange}</span>
+                  <span className="text-sm font-semibold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">{domain.salaryRange}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Time to Learn:</span>
-                  <span className="text-sm font-bold text-blue-600">{domain.timeToLearn}</span>
+                  <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{domain.timeToLearn}</span>
                 </div>
               </div>
 
               {expandedDomain === domain.id && (
-                <div className="mt-6 pt-4 border-t border-gray-200 space-y-5 animate-fade-in">
+                <div className="mt-6 pt-4 border-t space-y-4 animate-fade-in">
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-2 flex items-center">
-                      <span className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-2"></span>
-                      Remote Friendly:
-                    </h4>
-                    <Badge variant={domain.remoteFriendly ? "default" : "secondary"} className="font-medium">
+                    <h4 className="font-semibold text-gray-800 mb-2">Remote Friendly:</h4>
+                    <Badge variant={domain.remoteFriendly ? "default" : "secondary"} className="bg-gradient-to-r from-green-500 to-blue-500 text-white">
                       {domain.remoteFriendly ? "Yes" : "No"}
                     </Badge>
                   </div>
-
+                  
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-2 flex items-center">
-                      <span className="w-2 h-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mr-2"></span>
-                      Company Types:
-                    </h4>
-                    <div className="flex flex-wrap gap-1">
+                    <h4 className="font-semibold text-gray-800 mb-2">Company Types:</h4>
+                    <div className="flex flex-wrap gap-2">
                       {domain.companyTypes.map((type) => (
-                        <Badge key={type} variant="outline" className="text-xs font-medium">
+                        <Badge key={type} variant="outline" className="bg-gradient-to-r from-purple-50 to-blue-50 border-purple-200 text-purple-700">
                           {type}
                         </Badge>
                       ))}
                     </div>
                   </div>
-
+                  
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-2 flex items-center">
-                      <span className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-2"></span>
-                      Key Technologies:
-                    </h4>
-                    <div className="flex flex-wrap gap-1">
+                    <h4 className="font-semibold text-gray-800 mb-2">Key Technologies:</h4>
+                    <div className="flex flex-wrap gap-2">
                       {domain.languages.map((lang) => (
-                        <Badge key={lang} variant="outline" className="text-xs font-medium bg-gradient-to-r from-gray-50 to-gray-100">
+                        <Badge key={lang} variant="outline" className="bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200 text-blue-700">
                           {lang}
                         </Badge>
                       ))}
                     </div>
                   </div>
-
+                  
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-3 flex items-center">
-                      <span className="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mr-2"></span>
-                      How to Learn:
-                    </h4>
-                    <ul className="text-sm text-gray-700 space-y-2">
+                    <h4 className="font-semibold text-gray-800 mb-2">How to Learn:</h4>
+                    <ul className="text-sm text-gray-600 space-y-1">
                       {domain.howToLearn.map((step, index) => (
                         <li key={index} className="flex items-start">
-                          <span className="inline-flex items-center justify-center w-5 h-5 mr-2 text-xs font-bold text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex-shrink-0 mt-0.5">
-                            {index + 1}
-                          </span>
+                          <span className="w-2 h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-2 mt-2 flex-shrink-0"></span>
                           {step}
                         </li>
                       ))}
                     </ul>
                   </div>
-
+                  
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-3 flex items-center">
-                      <span className="w-2 h-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mr-2"></span>
-                      Where to Learn:
-                    </h4>
-                    <ul className="text-sm text-gray-700 space-y-2">
-                      {domain.whereToLearn.map((resource, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mr-2 mt-2 flex-shrink-0"></span>
-                          {resource}
-                        </li>
+                    <h4 className="font-semibold text-gray-800 mb-3">Recommended Learning Resources:</h4>
+                    <div className="space-y-2">
+                      {domain.courseLinks && domain.courseLinks.map((course, index) => (
+                        <button
+                          key={index}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(course.url, '_blank');
+                          }}
+                          className="w-full text-left p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200 hover:from-blue-100 hover:to-purple-100 transition-all duration-200 flex items-center justify-between group"
+                        >
+                          <span className="text-sm font-medium text-blue-700">{course.name}</span>
+                          <ExternalLink size={14} className="text-blue-600 group-hover:scale-110 transition-transform" />
+                        </button>
                       ))}
-                    </ul>
+                      <div className="text-sm text-gray-600 space-y-1">
+                        {domain.whereToLearn.slice(domain.courseLinks?.length || 0).map((resource, index) => (
+                          <div key={index} className="flex items-start">
+                            <span className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                            {resource}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 const DSASection = () => {
   const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
   const [showPreparation, setShowPreparation] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
   const goals = [
     {
@@ -83,76 +84,174 @@ const DSASection = () => {
   const topicsByGoal = {
     faang: [
       {
-        category: 'Data Structures',
-        topics: ['Arrays & Strings', 'Hash Tables', 'Trees & Graphs', 'Heaps', 'Tries'],
+        id: 'arrays',
+        name: 'Arrays & Strings',
+        type: 'Data Structure',
+        description: 'Foundation of programming',
         questions: [
-          { name: 'Two Sum', level: 'Easy', pattern: 'Hash Table' },
+          { name: 'Two Sum', level: 'Easy', pattern: 'Hash Map' },
           { name: 'Valid Parentheses', level: 'Easy', pattern: 'Stack' },
-          { name: 'Binary Tree Level Order', level: 'Medium', pattern: 'BFS' },
-          { name: 'Course Schedule', level: 'Medium', pattern: 'Topological Sort' },
-          { name: 'Word Ladder', level: 'Hard', pattern: 'BFS/Graph' }
+          { name: 'Longest Substring Without Repeating', level: 'Medium', pattern: 'Sliding Window' },
+          { name: 'Group Anagrams', level: 'Medium', pattern: 'Hash Map' },
+          { name: 'Minimum Window Substring', level: 'Hard', pattern: 'Sliding Window' }
         ]
       },
       {
-        category: 'Algorithms',
-        topics: ['Dynamic Programming', 'Graph Algorithms', 'Advanced Trees', 'System Design'],
+        id: 'trees',
+        name: 'Binary Trees',
+        type: 'Data Structure',
+        description: 'Hierarchical data organization',
+        questions: [
+          { name: 'Maximum Depth of Binary Tree', level: 'Easy', pattern: 'DFS' },
+          { name: 'Same Tree', level: 'Easy', pattern: 'DFS' },
+          { name: 'Binary Tree Level Order Traversal', level: 'Medium', pattern: 'BFS' },
+          { name: 'Validate Binary Search Tree', level: 'Medium', pattern: 'DFS' },
+          { name: 'Serialize and Deserialize Binary Tree', level: 'Hard', pattern: 'DFS/BFS' }
+        ]
+      },
+      {
+        id: 'dynamic-programming',
+        name: 'Dynamic Programming',
+        type: 'Algorithm',
+        description: 'Optimization technique',
         questions: [
           { name: 'Climbing Stairs', level: 'Easy', pattern: 'DP' },
+          { name: 'House Robber', level: 'Medium', pattern: 'DP' },
           { name: 'Coin Change', level: 'Medium', pattern: 'DP' },
+          { name: 'Longest Increasing Subsequence', level: 'Medium', pattern: 'DP' },
+          { name: 'Edit Distance', level: 'Hard', pattern: 'DP' }
+        ]
+      },
+      {
+        id: 'two-pointers',
+        name: 'Two Pointers',
+        type: 'Pattern',
+        description: 'Efficient array traversal',
+        questions: [
+          { name: 'Valid Palindrome', level: 'Easy', pattern: 'Two Pointers' },
+          { name: 'Container With Most Water', level: 'Medium', pattern: 'Two Pointers' },
+          { name: '3Sum', level: 'Medium', pattern: 'Two Pointers' },
+          { name: 'Remove Duplicates from Sorted Array', level: 'Easy', pattern: 'Two Pointers' },
+          { name: 'Trapping Rain Water', level: 'Hard', pattern: 'Two Pointers' }
+        ]
+      },
+      {
+        id: 'graphs',
+        name: 'Graph Algorithms',
+        type: 'Algorithm',
+        description: 'Network and relationship problems',
+        questions: [
           { name: 'Number of Islands', level: 'Medium', pattern: 'DFS/BFS' },
-          { name: 'LRU Cache', level: 'Medium', pattern: 'Design' },
-          { name: 'Serialize Binary Tree', level: 'Hard', pattern: 'Tree/Design' }
+          { name: 'Clone Graph', level: 'Medium', pattern: 'DFS/BFS' },
+          { name: 'Course Schedule', level: 'Medium', pattern: 'Topological Sort' },
+          { name: 'Word Ladder', level: 'Hard', pattern: 'BFS' },
+          { name: 'Alien Dictionary', level: 'Hard', pattern: 'Topological Sort' }
         ]
       }
     ],
     mnc: [
       {
-        category: 'Data Structures',
-        topics: ['Arrays & Strings', 'Linked Lists', 'Trees', 'Hash Tables', 'Stacks & Queues'],
+        id: 'arrays',
+        name: 'Arrays & Basic Operations',
+        type: 'Data Structure',
+        description: 'Core programming foundation',
         questions: [
-          { name: 'Reverse Linked List', level: 'Easy', pattern: 'Linked List' },
-          { name: 'Valid Anagram', level: 'Easy', pattern: 'Hash Table' },
-          { name: 'Maximum Subarray', level: 'Easy', pattern: 'Array' },
-          { name: 'Binary Tree Inorder', level: 'Medium', pattern: 'Tree Traversal' },
-          { name: 'Group Anagrams', level: 'Medium', pattern: 'Hash Table' }
+          { name: 'Two Sum', level: 'Easy', pattern: 'Hash Map' },
+          { name: 'Best Time to Buy and Sell Stock', level: 'Easy', pattern: 'Array' },
+          { name: 'Contains Duplicate', level: 'Easy', pattern: 'Hash Set' },
+          { name: 'Maximum Subarray', level: 'Easy', pattern: 'Kadane\'s Algorithm' },
+          { name: 'Rotate Array', level: 'Medium', pattern: 'Array Manipulation' }
         ]
       },
       {
-        category: 'Algorithms',
-        topics: ['Sorting & Searching', 'Basic DP', 'Recursion', 'Two Pointers'],
+        id: 'strings',
+        name: 'String Manipulation',
+        type: 'Data Structure',
+        description: 'Text processing fundamentals',
+        questions: [
+          { name: 'Valid Anagram', level: 'Easy', pattern: 'Hash Map' },
+          { name: 'Reverse String', level: 'Easy', pattern: 'Two Pointers' },
+          { name: 'First Unique Character', level: 'Easy', pattern: 'Hash Map' },
+          { name: 'Longest Common Prefix', level: 'Easy', pattern: 'String' },
+          { name: 'Group Anagrams', level: 'Medium', pattern: 'Hash Map' }
+        ]
+      },
+      {
+        id: 'basic-dp',
+        name: 'Basic Dynamic Programming',
+        type: 'Algorithm',
+        description: 'Introduction to optimization',
+        questions: [
+          { name: 'Fibonacci Number', level: 'Easy', pattern: 'DP' },
+          { name: 'Climbing Stairs', level: 'Easy', pattern: 'DP' },
+          { name: 'Min Cost Climbing Stairs', level: 'Easy', pattern: 'DP' },
+          { name: 'House Robber', level: 'Medium', pattern: 'DP' },
+          { name: 'Coin Change', level: 'Medium', pattern: 'DP' }
+        ]
+      },
+      {
+        id: 'searching',
+        name: 'Binary Search',
+        type: 'Algorithm',
+        description: 'Efficient searching technique',
         questions: [
           { name: 'Binary Search', level: 'Easy', pattern: 'Binary Search' },
-          { name: 'Merge Intervals', level: 'Medium', pattern: 'Intervals' },
-          { name: 'House Robber', level: 'Medium', pattern: 'DP' },
-          { name: 'Container With Most Water', level: 'Medium', pattern: 'Two Pointers' },
-          { name: 'Search in Rotated Array', level: 'Medium', pattern: 'Binary Search' }
+          { name: 'First Bad Version', level: 'Easy', pattern: 'Binary Search' },
+          { name: 'Search Insert Position', level: 'Easy', pattern: 'Binary Search' },
+          { name: 'Find Peak Element', level: 'Medium', pattern: 'Binary Search' },
+          { name: 'Search in Rotated Sorted Array', level: 'Medium', pattern: 'Binary Search' }
         ]
       }
     ],
     startup: [
       {
-        category: 'Data Structures',
-        topics: ['Arrays', 'Strings', 'Basic Trees', 'Hash Maps', 'Stacks'],
+        id: 'arrays',
+        name: 'Basic Arrays',
+        type: 'Data Structure', 
+        description: 'Starting point for programming',
         questions: [
+          { name: 'Two Sum', level: 'Easy', pattern: 'Hash Map' },
           { name: 'Contains Duplicate', level: 'Easy', pattern: 'Hash Set' },
-          { name: 'Maximum Depth of Binary Tree', level: 'Easy', pattern: 'Tree/DFS' },
-          { name: 'Best Time to Buy Stock', level: 'Easy', pattern: 'Array' },
-          { name: 'Valid Palindrome', level: 'Easy', pattern: 'Two Pointers' },
-          { name: 'Merge Two Sorted Lists', level: 'Easy', pattern: 'Linked List' }
+          { name: 'Best Time to Buy and Sell Stock', level: 'Easy', pattern: 'Array' },
+          { name: 'Maximum Subarray', level: 'Easy', pattern: 'Kadane\'s Algorithm' },
+          { name: 'Plus One', level: 'Easy', pattern: 'Array' }
         ]
       },
       {
-        category: 'Algorithms',
-        topics: ['Basic Sorting', 'Simple Recursion', 'Elementary DP', 'Pattern Matching'],
+        id: 'strings',
+        name: 'String Basics',
+        type: 'Data Structure',
+        description: 'Text handling essentials',
         questions: [
-          { name: 'Fibonacci Number', level: 'Easy', pattern: 'DP/Recursion' },
-          { name: 'First Bad Version', level: 'Easy', pattern: 'Binary Search' },
-          { name: 'Min Stack', level: 'Easy', pattern: 'Stack Design' },
-          { name: 'Palindrome Number', level: 'Easy', pattern: 'Math' },
-          { name: 'Single Number', level: 'Easy', pattern: 'Bit Manipulation' }
+          { name: 'Valid Palindrome', level: 'Easy', pattern: 'Two Pointers' },
+          { name: 'Valid Anagram', level: 'Easy', pattern: 'Hash Map' },
+          { name: 'Reverse String', level: 'Easy', pattern: 'Two Pointers' },
+          { name: 'First Unique Character', level: 'Easy', pattern: 'Hash Map' },
+          { name: 'Implement strStr()', level: 'Easy', pattern: 'String' }
+        ]
+      },
+      {
+        id: 'linked-lists',
+        name: 'Linked Lists',
+        type: 'Data Structure',
+        description: 'Dynamic data structure',
+        questions: [
+          { name: 'Reverse Linked List', level: 'Easy', pattern: 'Linked List' },
+          { name: 'Merge Two Sorted Lists', level: 'Easy', pattern: 'Linked List' },
+          { name: 'Linked List Cycle', level: 'Easy', pattern: 'Two Pointers' },
+          { name: 'Remove Nth Node From End', level: 'Medium', pattern: 'Two Pointers' },
+          { name: 'Add Two Numbers', level: 'Medium', pattern: 'Linked List' }
         ]
       }
     ]
+  };
+
+  const getFilteredQuestions = () => {
+    if (!selectedGoal || !selectedTopic) return [];
+    
+    const goalTopics = topicsByGoal[selectedGoal as keyof typeof topicsByGoal];
+    const topic = goalTopics?.find(t => t.id === selectedTopic);
+    return topic?.questions || [];
   };
 
   return (
@@ -241,29 +340,41 @@ const DSASection = () => {
           </h4>
           
           <div className="space-y-8">
-            {topicsByGoal[selectedGoal as keyof typeof topicsByGoal]?.map((category, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-gradient-to-br from-white to-gray-50">
-                <CardHeader>
-                  <CardTitle className="text-xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                    {category.category}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="mb-6">
-                    <h5 className="font-semibold text-gray-800 mb-3">Topics to Cover:</h5>
-                    <div className="flex flex-wrap gap-2">
-                      {category.topics.map((topic) => (
-                        <Badge key={topic} variant="outline" className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
-                          {topic}
-                        </Badge>
-                      ))}
-                    </div>
+            {/* Combined Topics Card */}
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-white to-gray-50">
+              <CardHeader>
+                <CardTitle className="text-xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  Complete Learning Path
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="mb-6">
+                  <h5 className="font-semibold text-gray-800 mb-3">Topics to Cover (Click to see questions):</h5>
+                  <div className="flex flex-wrap gap-3">
+                    {topicsByGoal[selectedGoal as keyof typeof topicsByGoal]?.map((topic) => (
+                      <button
+                        key={topic.id}
+                        onClick={() => setSelectedTopic(selectedTopic === topic.id ? null : topic.id)}
+                        className={`px-4 py-2 rounded-lg border transition-all duration-200 ${
+                          selectedTopic === topic.id
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent shadow-lg scale-105'
+                            : 'bg-white border-blue-200 text-gray-700 hover:border-blue-400 hover:shadow-md'
+                        }`}
+                      >
+                        <div className="text-sm font-medium">{topic.name}</div>
+                        <div className="text-xs opacity-80">{topic.type}</div>
+                      </button>
+                    ))}
                   </div>
-                  
-                  <div>
-                    <h5 className="font-semibold text-gray-800 mb-3">Top 5 Practice Questions:</h5>
+                </div>
+                
+                {selectedTopic && (
+                  <div className="animate-fade-in">
+                    <h5 className="font-semibold text-gray-800 mb-3">
+                      Practice Questions for {topicsByGoal[selectedGoal as keyof typeof topicsByGoal]?.find(t => t.id === selectedTopic)?.name}:
+                    </h5>
                     <div className="space-y-2">
-                      {category.questions.map((question, qIndex) => (
+                      {getFilteredQuestions().map((question, qIndex) => (
                         <div key={qIndex} className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-100">
                           <div>
                             <span className="font-medium text-gray-800">{question.name}</span>
@@ -281,40 +392,110 @@ const DSASection = () => {
                       ))}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                )}
+              </CardContent>
+            </Card>
 
-          {/* Tips Section */}
-          <Card className="mt-8 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 border-0 shadow-lg">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                <span className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-2"></span>
-                💡 Success Tips for {goals.find(g => g.id === selectedGoal)?.name}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Daily Practice:</h4>
-                  <ul className="space-y-1">
-                    <li>• Solve 1-2 problems daily (1 hour minimum)</li>
-                    <li>• Focus on understanding, not just solving</li>
-                    <li>• Review and optimize your solutions</li>
-                    <li>• Track your progress in a spreadsheet</li>
-                  </ul>
+            {/* Understanding DSA Concepts */}
+            <Card className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 border-0 shadow-lg">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-bold text-gray-800 mb-4">
+                  🤔 New to DSA? Understanding the Basics
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 className="font-semibold text-blue-600 mb-2">Data Structures</h4>
+                    <p className="text-gray-600">
+                      Ways to organize and store data (Arrays, Trees, Graphs, etc.). Think of them as containers with specific rules.
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 className="font-semibold text-green-600 mb-2">Algorithms</h4>
+                    <p className="text-gray-600">
+                      Step-by-step procedures to solve problems (Sorting, Searching, Dynamic Programming, etc.).
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 className="font-semibold text-purple-600 mb-2">Patterns</h4>
+                    <p className="text-gray-600">
+                      Common problem-solving techniques (Two Pointers, Sliding Window, etc.) that work across multiple problems.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Learning Resources:</h4>
-                  <ul className="space-y-1">
-                    <li>• YouTube: "DSA by Striver"</li>
-                    <li>• YouTube: "DSA by Love Babbar"</li>
-                    <li>• Practice: LeetCode, HackerRank</li>
-                    <li>• Books: "Cracking the Coding Interview"</li>
-                  </ul>
+              </CardContent>
+            </Card>
+
+            {/* How to Prep Section */}
+            <Card className="bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 border-0 shadow-lg">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-bold text-gray-800 mb-4">
+                  📚 How to Prep for {goals.find(g => g.id === selectedGoal)?.name}
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                    <h4 className="font-semibold text-gray-800 mb-2">Step 1: Pick a Topic</h4>
+                    <p className="text-gray-600 text-sm">
+                      Choose one topic from above (e.g., Arrays). Don't jump around - master one before moving to the next.
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg border-l-4 border-green-500">
+                    <h4 className="font-semibold text-gray-800 mb-2">Step 2: Understand the Basics</h4>
+                    <p className="text-gray-600 text-sm">
+                      Ask ChatGPT: "Explain [topic] with examples and when to use it." Read until you understand the concept clearly.
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg border-l-4 border-purple-500">
+                    <h4 className="font-semibold text-gray-800 mb-2">Step 3: Practice Problems</h4>
+                    <p className="text-gray-600 text-sm">
+                      Start with Easy problems from the topic. Use LeetCode/HackerRank. If stuck, ask ChatGPT for hints, not solutions.
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg border-l-4 border-orange-500">
+                    <h4 className="font-semibold text-gray-800 mb-2">Step 4: Learn Patterns</h4>
+                    <p className="text-gray-600 text-sm">
+                      Identify common patterns in problems. Ask ChatGPT: "What are common patterns for [topic] problems?"
+                    </p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
+                    <h4 className="font-semibold text-gray-800 mb-2">Step 5: Review & Repeat</h4>
+                    <p className="text-gray-600 text-sm">
+                      Solve 3-5 problems daily. Review previous problems weekly. Move to next topic only after mastering current one.
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            {/* Tips Section */}
+            <Card className="bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 border-0 shadow-lg">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                  <span className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-2"></span>
+                  💡 Success Tips for {goals.find(g => g.id === selectedGoal)?.name}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-2">Daily Practice:</h4>
+                    <ul className="space-y-1">
+                      <li>• Solve 1-2 problems daily (1 hour minimum)</li>
+                      <li>• Focus on understanding, not just solving</li>
+                      <li>• Review and optimize your solutions</li>
+                      <li>• Track your progress in a spreadsheet</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-2">Learning Resources:</h4>
+                    <ul className="space-y-1">
+                      <li>• ChatGPT for concept explanations</li>
+                      <li>• LeetCode for practice problems</li>
+                      <li>• Use ChatGPT for hints when stuck</li>
+                      <li>• Join coding communities for motivation</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       )}
     </div>
